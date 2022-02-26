@@ -23,8 +23,9 @@ Route::get('/registAdmin', [App\Http\Controllers\HomeController::class, 'registA
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
-Route::get('/', function () { return view('welcome'); });
-Route::get('/newMediator', [App\Http\Controllers\HomeController::class, 'newMediator'])->name('newMediator');
+//Route::get('/', function () { return view('welcome'); });
+Route::get('/', [App\Http\Controllers\HomeController::class, 'mypage'])->name('mypage');
+Route::get('/showMailTxt', [App\Http\Controllers\HomeController::class, 'showMailTxt'])->name('showMailTxt');
 Route::post('/addAdmin', [App\Http\Controllers\HomeController::class, 'addAdmin'])->name('addAdmin');
 Route::post('/addMediator', [App\Http\Controllers\HomeController::class, 'addMediator'])->name('addMediator');
 });

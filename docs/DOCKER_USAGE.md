@@ -11,6 +11,7 @@ docker と docker-compose が必要です。
 > cd THIS_REPOSITORY_DIR
 > rm laravel/.env
 > docker-compose up -d --build
+> docker exec -it tttest-laravel chmod +x /mnt/.docker/laravel/firstexec.sh
 > docker exec -it tttest-laravel /mnt/.docker/laravel/firstexec.sh
 ```
 
@@ -81,3 +82,11 @@ $ exit
 > docker exec -it tttest-laravel bash
 $ php artisan test
 ```
+
+## データベースmigrationの実行
+
+```sh
+> cd THIS_REPOSITORY_DIR
+> docker-compose up -d
+> docker exec -it tttest-laravel bash
+$ php artisan migration
