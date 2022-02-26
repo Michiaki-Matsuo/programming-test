@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.84.0">
+    <title>紹介者の追加</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
+  </head>
+<body>
+   <div class="container md-8 border border-2 border-primary margin">
+	   <div>
+		<div class="h1">List of Excellent Young-man</div>
+	   </div>
+	<div class="container border border-5 border-dark">
+		<div class="display-5">紹介情報提供者</div>
+		<form>
+			御名前
+			<input type="text" required class="form-control border border-2 border-secondary" name="name">
+			部署名
+			<input type="text" required class="form-control border border-2 border-secondary" name="department">
+			メールアドレス
+			<input type="email" required class="form-control border border-2 border-secondary" name="email" placeholder="name@example.com">
+			<div class="btn-group ml-auto" style="margin: 10px 10px 10px 0px">
+				<button class="btn btn-sm btn-primary" type="submit">
+				送信予定メール内容を確認
+				</button>
+				<button class="btn btn-sm btn-primary" style="margin-left:10px" type="submit">
+				上記内容を登録
+				</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
