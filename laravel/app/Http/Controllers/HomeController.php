@@ -25,4 +25,13 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    /*
+     * Show MyPage for Human Resource Department
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function mypage()
+    {
+	return view('mypage');
+    }
 }

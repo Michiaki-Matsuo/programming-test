@@ -12,20 +12,49 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-/*
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/login', [App\Http\Controllers\HomeController::class, 'login'])->name('login');
-Route::get('/registAdmin', [App\Http\Controllers\HomeController::class, 'registAdmin'])->name('registAdmin');
- */
-
 Auth::routes();
 
+/*
+ * ROUTE GROUP
+ * for Development
+ *
+ */
+Route::group(['prefix' => 'noDB'], function() {
+Route::get('mypage', function () {
+	$Mediators = [
+		['name' => 'さぬき太郎',
+		'depart' => '製麺部うどん課', 
+		'address' => 'test@kagawa.pref.jp'],
+		['name' => '阿波三芳',
+		'depart' => '生鮮食品部玉ねぎ課', 
+		'address' => 'test@tokusima.pref.jp'],
+		['name' => '松本伊予',
+		'depart' => '生鮮食品部柑橘課', 
+		'address' => 'test@ehime.pref.jp'],
+		['name' => '高知東生',
+		'depart' => '食品部清酒課', 
+		'address' => 'test@kochi.pref.jp']
+		];
+    return view('myPageList',compact('Mediators'));
+});
+});
+
+/*
+ * ROUTE GROUP
+ * for Controller Development
+ *
+ */
+Route::group(['prefix' => 'cnt'], function() {
+Route::get('mypage', [App\Http\Controllers\HomeController::class, 'mypage'])->name('mypage');
+});
+
+/*
+ * ROUTE GROUP
+ * for LOGIN Requied
+ *
+ */
 Route::group(['middleware' => 'auth'], function () {
-//Route::get('/', function () { return view('welcome'); });
 Route::get('/', [App\Http\Controllers\HomeController::class, 'mypage'])->name('mypage');
 Route::get('/showMailTxt', [App\Http\Controllers\HomeController::class, 'showMailTxt'])->name('showMailTxt');
-Route::post('/addAdmin', [App\Http\Controllers\HomeController::class, 'addAdmin'])->name('addAdmin');
-Route::post('/addMediator', [App\Http\Controllers\HomeController::class, 'addMediator'])->name('addMediator');
+Route::get('/addMediator', [App\Http\Controllers\HomeController::class, 'addMediator'])->name('addMediator');
 });
