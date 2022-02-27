@@ -54,7 +54,7 @@
 
 		</div>
 	    </div> <!--col-row-->
-@yield('mediatorList')
+@yield('meditator')
 	</div>
 
   </body>

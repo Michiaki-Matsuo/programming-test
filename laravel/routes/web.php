@@ -21,7 +21,7 @@ Auth::routes();
  */
 Route::group(['prefix' => 'noDB'], function() {
 Route::get('mypage', function () {
-	$Mediators = [
+	$meditators = [
 		['name' => 'さぬき太郎',
 		'depart' => '製麺部うどん課', 
 		'address' => 'test@kagawa.pref.jp'],
@@ -35,7 +35,17 @@ Route::get('mypage', function () {
 		'depart' => '食品部清酒課', 
 		'address' => 'test@kochi.pref.jp']
 		];
-    return view('myPageList',compact('Mediators'));
+	$targets = [
+		[ 'name' => '松尾道明',
+		'company' => '株式会社A',
+		'medi_name' => '中山　優',
+		'medi_depart' => '営業部　営業課']
+	];
+
+    return view('myPageList',compact('meditators','targets'));
+});
+Route::get('addMeditator', function () {
+    return view('addMeditator');
 });
 });
 

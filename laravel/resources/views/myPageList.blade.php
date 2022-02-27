@@ -1,16 +1,30 @@
 @extends('layouts.mypage')
-@section('mediatorList')
+@section('meditator')
 	<div class="row">
 		<div class="col-md-3 border border-3"> <p class="text-decoration-underline h3">紹介(情報提供者)</p>
 		<table>
-@foreach($Mediators AS $Mediator)
+@foreach($meditators AS $meditator)
 			<tr>
-				<td> {{ $Mediator['depart'] }} </td> <td> {{ $Mediator['name'] }} </td> <td> {{ $Mediator['address'] }} </td>
+				<td> {{ $meditator['depart'] }} </td> <td> {{ $meditator['name'] }} </td> <td> {{ $meditator['address'] }} </td>
 			</tr>
 @endforeach
 		</table>
 		</div>
 		<div class="col-md-2 border border-3"> <p class="text-decoration-underline h3">ご紹介(対象者様)</p> 
+		<table>
+@foreach($targets AS $target)
+			<tr>
+				<td> {{ $target['company'] }} </td> <td> {{ $target['name'] }} </td> 
+			</tr>
+			<tr>
+				<td> {{ $target['medi_depart'] }} </td> <td> {{ $target['medi_name'] }} </td> 
+			</tr>
+@endforeach
+		</table>
 		</div>
 	    </div> <!--col-row-->
+<p></p>
+<p></p>
+<p></p>
+<a href="/noDB/addMeditator">紹介(情報提供者)の追加</a>
 @endsection
