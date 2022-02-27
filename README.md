@@ -1,20 +1,37 @@
-# ツチノコテクノロジー 開発能力テスト
+### README.md
 
-ツチノコテクノロジーでは、プログラマーおよびデザイナーの採用にあたって、開発能力テスト（以下、「本テスト」といいます）を実施しています。  
-[tutinokotech/programming-testリポジトリ](https://github.com/tutinokotech/programming-test)（以下、「本リポジトリ」といいます）は、本テストの環境を提供します。  
-以下の説明をよく読み、開発能力テストの実施をお願いいたします。  
-なお、本テストは最低限の実力を与えるためのテストであり、一次面接に合格している方には本テストを通じて、弊社の社員全員が本テストくらいの業務はそつなくこなすレベルだと実感していただきたいと考えています。  
+### サーバーOS、開発言語、フレームワークのバージョン情報
 
-## 概要
+バージョン情報は以下のとおりです。
 
-- 本テストは実際の業務のようなシステム（以下「本システム」といいます）の一部を制作します  
-- 本テストで制作するシステムの機能仕様書は、[FUNCTIONS.md](docs/FUNCTIONS.md)に記載します  
-- 本テストの課題は、[TASK.md](docs/TASK.md)に記載します  
+- PHP 8.0.16 
+- Laravel Framework 8.69.0
+- MySQL 5.7.37
 
-## 開発能力テストの受験方法
+### Docker による開発環境の構築手順
 
-1. 本リポジトリを [Fork](https://docs.github.com/ja/get-started/quickstart/fork-a-repo) し、 private リポジトリに変更します  
+## 初回起動時
 
-1. [FUNCTIONS.md](docs/FUNCTIONS.md)をよく読み、[TASK.md](docs/TASK.md)に対するプログラムを作成し、コミットします  
+```sh
+> cd THIS_REPOSITORY_DIR
+> rm laravel/.env
+> docker-compose up -d --build
+> docker exec -it tttest-laravel chmod +x /mnt/.docker/laravel/firstexec.sh
+> docker exec -it tttest-laravel /mnt/.docker/laravel/firstexec.sh
 
-1. ツチノコテクノロジーの一次面接に合格後に、[こちら](https://docs.github.com/ja/account-and-profile/setting-up-and-managing-your-github-user-account/managing-access-to-your-personal-repositories/inviting-collaborators-to-a-personal-repository)を参考に、本テストのチェック担当者をリポジトリのコラボレーターに登録してください  
+- `laravel/.env.docker` が更新された場合、反映のために一度 `laravel/.env` ファイルを削除する必要があります。それ以外の場合に `laravel/.env` を削除する必要はありません。  
+- 現在、 `laravel/firstexec.sh` を実行するとDBのデータが初期化されます。データを削除したくない場合は、引数 `--nodb` をつけて実行してください。  
+
+```sh
+> docker exec -it tttest-laravel /mnt/.docker/laravel/firstexec.sh --nodb
+
+### 初期データ、およびユーザーの登録方法
+
+http://localhost:8000/register
+
+### システム側のメール設定
+
+### システム起動までの準備及び起動手順
+### ログイン画面のURL
+
+サイト（localhost等）にアクセスした際にログイン画面が初期表示される。

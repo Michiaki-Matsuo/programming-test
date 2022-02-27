@@ -33,6 +33,24 @@ Route::get('mypage', function () {
 		'address' => 'test@ehime.pref.jp'],
 		['name' => '高知東生',
 		'depart' => '食品部清酒課', 
+		'address' => 'test@kochi.pref.jp'],
+		['name' => 'さぬき太郎',
+		'depart' => '製麺部うどん課', 
+		'address' => 'test@kagawa.pref.jp'],
+		['name' => '阿波三芳',
+		'depart' => '生鮮食品部玉ねぎ課', 
+		'address' => 'test@tokusima.pref.jp'],
+		['name' => '松本伊予',
+		'depart' => '生鮮食品部柑橘課', 
+		'address' => 'test@ehime.pref.jp'],
+		['name' => '高知東生',
+		'depart' => '食品部清酒課', 
+		'address' => 'test@kochi.pref.jp'],
+		['name' => '松本伊予',
+		'depart' => '生鮮食品部柑橘課', 
+		'address' => 'test@ehime.pref.jp'],
+		['name' => '高知東生',
+		'depart' => '食品部清酒課', 
 		'address' => 'test@kochi.pref.jp']
 		];
 	$targets = [
@@ -65,6 +83,6 @@ Route::get('mypage', [App\Http\Controllers\HomeController::class, 'mypage'])->na
  */
 Route::group(['middleware' => 'auth'], function () {
 Route::get('/', [App\Http\Controllers\HomeController::class, 'mypage'])->name('mypage');
-Route::get('/showMailTxt', [App\Http\Controllers\HomeController::class, 'showMailTxt'])->name('showMailTxt');
-Route::get('/addMediator', [App\Http\Controllers\HomeController::class, 'addMediator'])->name('addMediator');
+//Route::get('/showMailTxt', [App\Http\Controllers\HomeController::class, 'showMailTxt'])->name('showMailTxt');
+//Route::get('/addMediator', [App\Http\Controllers\HomeController::class, 'addMediator'])->name('addMediator');
 });
