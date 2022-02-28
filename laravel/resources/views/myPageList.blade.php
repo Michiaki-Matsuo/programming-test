@@ -1,7 +1,7 @@
 @extends('layouts.mypage')
 @section('meditator')
 	<div class="row">
-		<div class="col-md-3 border border-3"> <p class="text-decoration-underline h3">紹介(情報提供者)</p>
+		<div class="col-md-5 border border-3"> <p class="text-decoration-underline h3">紹介(情報提供者)</p>
 		<table>
 @foreach($meditators AS $meditator)
 			<tr>
@@ -23,8 +23,7 @@
 		</table>
 		</div>
 	    </div> <!--col-row-->
-<p></p>
-<p></p>
-<p></p>
-<a href="/noDB/addMeditator">紹介(情報提供者)の追加</a>
+	<div>
+		<a href="/addMeditator">紹介(情報提供者)の追加</a>
+	</div>
 @endsection

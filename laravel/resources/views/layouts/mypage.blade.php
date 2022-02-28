@@ -46,11 +46,14 @@
 	    <div class="row">
 		<div class="col-md-auto display-4"> List of Excellent Young-man</div>
 		<div class="col p-3 bg-white">
-			<a class="dropdown-item" href="{{ route('logout') }}"
-				onclick="event.preventDefault();
-				     document.getElementById('logout-form').submit();">
-				<p class="text-primary text-decoration-underline">ログアウト<p>
-			</a>
+			<a href="/logout"
+					       onclick="event.preventDefault();
+						     document.getElementById('logout-form').submit();">ログアウト</a>
+
+			    <form id="logout-form" action="/logout" method="POST" style="display: none;">
+				@csrf
+			    </form>
+
 
 		</div>
 	    </div> <!--col-row-->
