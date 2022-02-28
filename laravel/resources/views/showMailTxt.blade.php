@@ -41,24 +41,19 @@
 </head>
 <body>
  
-<main>
-	<div class="container col-md-auto">
-	    <div class="row">
-		<div class="col-md-auto display-4"> List of Excellent Young-man</div>
-		<div class="col p-3 bg-white">
-			<a href="/logout"
-					       onclick="event.preventDefault();
-						     document.getElementById('logout-form').submit();">ログアウト</a>
-
-			    <form id="logout-form" action="/logout" method="POST" style="display: none;">
-				@csrf
-			    </form>
-
-
+	<main>
+		<div class="row">
+			<div class="col-md-4 border border-5 border-dark">
+				<div class="offset-md-3 display-5">確認用メール文書</div>
+				<p>いつも優秀な人材を紹介してくれてありがとうございます。</p>
+				<p>これからも、我が社に入ってくれそうな人材をぜひともご紹介ください。</p>
+				<p>List of Excellent Young-man は、みなさんから人事部に紹介してもいいと</p>
+				<p>思った人たちを登録いただくシステムです。</p>
+				<p>もし人事部から連絡してもよい優秀な方がいらっしゃいましたら、ぜひご登録をお願いします。</p>
+				
+				<p>	個別のログインパスワード</p>
+				 <p>URL</p>
+			</div>
 		</div>
-	    </div> <!--col-row-->
-@yield('mediator')
-	</div>
-
-  </body>
-</html>
+	</main>
+</body>

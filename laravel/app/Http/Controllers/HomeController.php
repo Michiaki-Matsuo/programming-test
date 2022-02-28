@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facedes\Auth;
+use App\Models\Mediator;
 
 class HomeController extends Controller
 {
@@ -74,17 +74,31 @@ class HomeController extends Controller
 
 	return view('myPageList',compact('meditators','targets'));
     }
-    public function addMeditator()
+    public function addMediator()
     {
-	return view('addMeditator');
+	return view('addMediator');
     }
-    /*
-    public function logout(Request $request)
+    public function insertMediator(Request $request)
     {
-		Auth::logout();
-		$request->session()->invalidate();
-		$request->session()->regenerateToken();
+		$data = $request->all();
+		$user = \Auth::user();
+
+		Mediator::insert([
+			'name' => $data['name'],
+			'department' => $data['department'],
+			'email' => $data['email'],
+			'ownerid' => $user['id']
+		]);
+
 		return redirect('/');
     }
-     */
+	public function showMailTxt(Request $request)
+	{
+		$data = $request->all();
+    		// dd($data);
+
+
+		return view('/showMailTxt');
+	}
+
 }

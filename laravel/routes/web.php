@@ -28,7 +28,7 @@ Route::group(['middleware' => ['guest']], function () {
 Route::group(['middleware' => 'auth'], function () {
 Route::get('/', [App\Http\Controllers\HomeController::class, 'myPage'])->name('myPage');
 //Route::get('/Logout', [App\Http\Controllers\HomeController::class, 'logout'])->name('logout');
-//Route::get('/showMailTxt', [App\Http\Controllers\HomeController::class, 'showMailTxt'])->name('showMailTxt');
-Route::get('/addMeditator', [App\Http\Controllers\HomeController::class, 'addMeditator'])->name('addMeditator');
-//Route::post('/addMeditator', [App\Http\Controllers\HomeController::class, 'addMeditator'])->name('addMeditator');
+Route::get('/addMediator', [App\Http\Controllers\HomeController::class, 'addMediator'])->name('addMediator');
+Route::post('/showMailTxt', [App\Http\Controllers\HomeController::class, 'showMailTxt'])->name('showMailTxt');
+Route::post('/addMediator', [App\Http\Controllers\HomeController::class, 'insertMediator'])->name('insertMediator');
 });

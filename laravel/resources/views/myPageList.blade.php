@@ -1,5 +1,5 @@
 @extends('layouts.mypage')
-@section('meditator')
+@section('mediator')
 	<div class="row">
 		<div class="col-md-5 border border-3"> <p class="text-decoration-underline h3">紹介(情報提供者)</p>
 		<table>
@@ -24,6 +24,6 @@
 		</div>
 	    </div> <!--col-row-->
 	<div>
-		<a href="/addMeditator">紹介(情報提供者)の追加</a>
+		<a href="/addMediator">紹介(情報提供者)の追加</a>
 	</div>
 @endsection
