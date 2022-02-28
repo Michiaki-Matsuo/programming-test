@@ -33,38 +33,9 @@ class HomeController extends Controller
      */
     public function myPage()
     {
-	$meditators = [
-		['name' => 'さぬき太郎',
-		'depart' => '製麺部うどん課', 
-		'address' => 'test@kagawa.pref.jp'],
-		['name' => '阿波三芳',
-		'depart' => '生鮮食品部玉ねぎ課', 
-		'address' => 'test@tokusima.pref.jp'],
-		['name' => '松本伊予',
-		'depart' => '生鮮食品部柑橘課', 
-		'address' => 'test@ehime.pref.jp'],
-		['name' => '高知東生',
-		'depart' => '食品部清酒課', 
-		'address' => 'test@kochi.pref.jp'],
-		['name' => 'さぬき太郎',
-		'depart' => '製麺部うどん課', 
-		'address' => 'test@kagawa.pref.jp'],
-		['name' => '阿波三芳',
-		'depart' => '生鮮食品部玉ねぎ課', 
-		'address' => 'test@tokusima.pref.jp'],
-		['name' => '松本伊予',
-		'depart' => '生鮮食品部柑橘課', 
-		'address' => 'test@ehime.pref.jp'],
-		['name' => '高知東生',
-		'depart' => '食品部清酒課', 
-		'address' => 'test@kochi.pref.jp'],
-		['name' => '松本伊予',
-		'depart' => '生鮮食品部柑橘課', 
-		'address' => 'test@ehime.pref.jp'],
-		['name' => '高知東生',
-		'depart' => '食品部清酒課', 
-		'address' => 'test@kochi.pref.jp']
-		];
+		$user = \Auth::user();
+	$mediators = Mediator::where('ownerid',$user['id'])->get();
+	
 	$targets = [
 		[ 'name' => '松尾道明',
 		'company' => '株式会社A',
@@ -72,7 +43,7 @@ class HomeController extends Controller
 		'medi_depart' => '営業部　営業課']
 	];
 
-	return view('myPageList',compact('meditators','targets'));
+	return view('myPageList',compact('mediators','targets'));
     }
     public function addMediator()
     {
@@ -82,6 +53,7 @@ class HomeController extends Controller
     {
 		$data = $request->all();
 		$user = \Auth::user();
+
 
 		Mediator::insert([
 			'name' => $data['name'],

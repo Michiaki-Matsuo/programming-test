@@ -3,9 +3,9 @@
 	<div class="row">
 		<div class="col-md-5 border border-3"> <p class="text-decoration-underline h3">紹介(情報提供者)</p>
 		<table>
-@foreach($meditators AS $meditator)
+@foreach($mediators AS $mediator)
 			<tr>
-				<td> {{ $meditator['depart'] }} </td> <td> {{ $meditator['name'] }} </td> <td> {{ $meditator['address'] }} </td>
+				<td> {{ $mediator['department'] }} </td> <td> {{ $mediator['name'] }} </td> <td> {{ $mediator['email'] }} </td>
 			</tr>
 @endforeach
 		</table>
