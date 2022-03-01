@@ -1,6 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\sendRequest;
+
+Route::get('/test', function () {
+    Mail::to('test@example.com')->send(new sendRequest);
+    return 'メール送信しました！';
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -27,8 +34,9 @@ Route::group(['middleware' => ['guest']], function () {
  */
 Route::group(['middleware' => 'auth'], function () {
 Route::get('/', [App\Http\Controllers\HomeController::class, 'myPage'])->name('myPage');
-//Route::get('/Logout', [App\Http\Controllers\HomeController::class, 'logout'])->name('logout');
+Route::get('/myPage', [App\Http\Controllers\HomeController::class, 'myPage'])->name('myPage');
 Route::get('/addMediator', [App\Http\Controllers\HomeController::class, 'addMediator'])->name('addMediator');
-Route::post('/showMailTxt', [App\Http\Controllers\HomeController::class, 'showMailTxt'])->name('showMailTxt');
-Route::post('/addMediator', [App\Http\Controllers\HomeController::class, 'insertMediator'])->name('insertMediator');
+Route::post('/confirmWithDraft', [App\Http\Controllers\HomeController::class, 'confirmWithDraft'])->name('confirmWithDraft');
+Route::post('/editMediator', [App\Http\Controllers\HomeController::class, 'editMediator'])->name('editMediator');
+Route::post('/commitMediator', [App\Http\Controllers\HomeController::class, 'commitMediator'])->name('commitMediator');
 });

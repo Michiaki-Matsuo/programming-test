@@ -39,6 +39,7 @@ services:
     container_name: tttest-maild
     hostname: 'tttest-maild'
     ports:
+      - "1025:1025"
       - "8025:8025"
 
   phpmyadmin:

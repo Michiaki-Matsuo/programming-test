@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Mediator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\sendRequest;
 
 class HomeController extends Controller
 {
@@ -48,9 +50,15 @@ class HomeController extends Controller
     }
     public function addMediator()
     {
-	return view('addMediator');
+        $data=['name'=>'','department'=>'','email'=>''];
+        return view('addMediator',compact('data'));
     }
-    public function insertMediator(Request $request)
+    public function editMediator(Request $request)
+    {
+		$data = $request->all();
+	return view('addMediator',compact('data'));
+    }
+    public function commitMediator(Request $request)
     {
 		$data = $request->all();
 		$user = \Auth::user();
@@ -63,13 +71,16 @@ class HomeController extends Controller
                 'name' => $data['name'],
                 'department' => $data['department'],
                 'email' => $data['email'],
-                'ownerid' => $user['id']
+                'ownerid' => $user['id'],
+                'password' => Hash::make($data['password'])
             ]);
         }
-
+        //メールを送信する。
+        Mail::to('test@example.com')->send(new sendRequest);
+        
 		return redirect('/');
     }
-	public function showMailTxt(Request $request)
+	public function confirmWithDraft(Request $request)
 	{
 		$data = $request->all();
         $user = \Auth::user();
@@ -91,19 +102,10 @@ class HomeController extends Controller
                     ' ',
                     'List of Excellent Young-manにはこちらからアクセス下さい。こちら＝＞http://localhost/',
                     $data['name'] . ' 様のパスワードは、「' . $password . '」となっております。'
-                    ];
-        // 同じメールアドレスを持つ情報提供者がいるか確認
-        $exist_mediator = Mediator::where('email', $data['email'])->first();
-        if( empty($exist_mediator['id']) ){
-            //いなければ情報提供者をインサート
-             Mediator::insert([
-                'name' => $data['name'],
-                'department' => $data['department'],
-                'email' => $data['email'],
-                'password' => Hash::make($password),
-                'ownerid' => $user['id']
-            ]);
-        }                    
-		return view('/showMailTxt',compact('messages'));
+                    ]; 
+        $pwd = ['password' => $password];
+        $data = array_merge($data,$pwd);  
+         
+		return view('/confirmWithDraft',compact('messages','data'));
 	}
 }
