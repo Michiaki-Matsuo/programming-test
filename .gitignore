@@ -10,3 +10,4 @@ Homestead.json
 /.vagrant
 .phpunit.result.cache
 
+docs/artisan.md

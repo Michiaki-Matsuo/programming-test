@@ -14,7 +14,7 @@ class AddPasswordMediatorsTable extends Migration
     public function up()
     {
         Schema::table('mediators', function (Blueprint $table) {
-            $table->string('password')->nullable()->comment('パスワードHASH値');
+            $table->string('password')->comment('パスワードHASH値');
         });
     }
 

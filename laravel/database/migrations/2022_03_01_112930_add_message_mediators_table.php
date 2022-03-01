@@ -14,7 +14,7 @@ class AddMessageMediatorsTable extends Migration
     public function up()
     {
         Schema::table('mediators', function (Blueprint $table) {
-            $table->string('message')->nullable()->comment('メール本文');
+            $table->string('message')->comment('パスワード非HASH値を含むメール本文');
         });
     }
 
