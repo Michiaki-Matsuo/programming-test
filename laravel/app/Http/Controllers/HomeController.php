@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Mediator;
 
@@ -54,23 +55,55 @@ class HomeController extends Controller
 		$data = $request->all();
 		$user = \Auth::user();
 
-
-		Mediator::insert([
-			'name' => $data['name'],
-			'department' => $data['department'],
-			'email' => $data['email'],
-			'ownerid' => $user['id']
-		]);
+        // 同じメールアドレスを持つ情報提供者がいるか確認
+        $exist_mediator = Mediator::where('email', $data['email'])->first();
+        if( empty($exist_mediator['id']) ){
+            //いなければ情報提供者をインサート
+            Mediator::insert([
+                'name' => $data['name'],
+                'department' => $data['department'],
+                'email' => $data['email'],
+                'ownerid' => $user['id']
+            ]);
+        }
 
 		return redirect('/');
     }
 	public function showMailTxt(Request $request)
 	{
 		$data = $request->all();
-    		// dd($data);
-
-
-		return view('/showMailTxt');
+        $user = \Auth::user();
+        
+        //数字と英語の小文字と大文字が混ざったランダムな 8 文字
+        $password = str_shuffle(
+                            substr(str_shuffle('1234567890'), 0, 2) .
+                            substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 3) .
+                            substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 3)
+        );
+        
+        $messages = [ $data['department'] . ' ' . $data['name'] . ' 様',
+                    ' 送付先アドレス：' . $data['email'],
+                    ' ',
+                    'いつも優秀な人材を紹介してくれてありがとうございます。',
+        			'これからも、我が社に入ってくれそうな人材をぜひともご紹介ください。',
+				    'List of Excellent Young-man は、みなさんから人事部に紹介してもいいと思った人たちを登録いただくシステムです。',
+				    'もし人事部から連絡してもよい優秀な方がいらっしゃいましたら、ぜひご登録をお願いします。',
+                    ' ',
+                    'List of Excellent Young-manにはこちらからアクセス下さい。こちら＝＞http://localhost/',
+                    $data['name'] . ' 様のパスワードは、「' . $password . '」となっております。'
+                    ];
+        // 同じメールアドレスを持つ情報提供者がいるか確認
+        $exist_mediator = Mediator::where('email', $data['email'])->first();
+        if( empty($exist_mediator['id']) ){
+            //いなければ情報提供者をインサート
+             Mediator::insert([
+                'name' => $data['name'],
+                'department' => $data['department'],
+                'email' => $data['email'],
+                'password' => Hash::make($password),
+                'ownerid' => $user['id']
+            ]);
+        }                    
+		return view('/showMailTxt',compact('messages'));
 	}
-
 }
