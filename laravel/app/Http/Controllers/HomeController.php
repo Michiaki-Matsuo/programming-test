@@ -67,10 +67,26 @@ class HomeController extends Controller
 	public function showMailTxt(Request $request)
 	{
 		$data = $request->all();
-    		// dd($data);
+    
+        $messages = [ $data['department'] . ' ' . $data['name'] . ' 様',
+                    ' 送付アドレス：' . $data['email'],
+                    ' ',
+                    'いつも優秀な人材を紹介してくれてありがとうございます。',
+        			'これからも、我が社に入ってくれそうな人材をぜひともご紹介ください。',
+				    'List of Excellent Young-man は、みなさんから人事部に紹介してもいいと思った人たちを登録いただくシステムです。',
+				    'もし人事部から連絡してもよい優秀な方がいらっしゃいましたら、ぜひご登録をお願いします。',
+                    ' ',
+                    'List of Excellent Young-manにはこちらからアクセス下さい。http://localhost/',
+                    $data['name'] . ' 様のパスワードは、「' . '」となっております。'
+                    ];
+				/*
+				<p>	個別のログインパスワード</p>
+				<p>URL</p>
+        */
+    
 
 
-		return view('/showMailTxt');
+		return view('/showMailTxt',compact('messages'));
 	}
 
 }

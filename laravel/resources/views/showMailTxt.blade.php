@@ -40,20 +40,16 @@
 
 </head>
 <body>
- 
-	<main>
-		<div class="row">
-			<div class="col-md-4 border border-5 border-dark">
-				<div class="offset-md-3 display-5">確認用メール文書</div>
-				<p>いつも優秀な人材を紹介してくれてありがとうございます。</p>
-				<p>これからも、我が社に入ってくれそうな人材をぜひともご紹介ください。</p>
-				<p>List of Excellent Young-man は、みなさんから人事部に紹介してもいいと</p>
-				<p>思った人たちを登録いただくシステムです。</p>
-				<p>もし人事部から連絡してもよい優秀な方がいらっしゃいましたら、ぜひご登録をお願いします。</p>
-				
-				<p>	個別のログインパスワード</p>
-				 <p>URL</p>
-			</div>
-		</div>
+ 	<main>
+		<div class="container">
+      <div class="col-md-6">
+        <p class="py-3 font-weight-bold">送信前確認用メール本文</p>
+      </div>
+	  	<div class="col-md-8 border border-5 border-dark">
+				@foreach($messages AS $message)
+          {{ $message }} <br>
+        @endforeach
+      </div>
+    </div>
 	</main>
 </body>
