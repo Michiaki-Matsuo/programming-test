@@ -46,26 +46,31 @@
       <div class="col-md-6">
         <p class="py-3 font-weight-bold">送信前確認用メール本文</p>
       </div>
-	  	<div class="col-md-8 border border-5 border-dark">
-				@foreach($messages AS $message)
-          {{ $message }} <br>
-        @endforeach
+	  	<div class="col-md-8 border border-5 border-dark my-0 py-0">
+        <p style="margin: 0px; padding: 0px;">{{ $data['department'] . ' ' . $data['name'] . ' 様'}}</p>
+        <p style="margin: 0px; padding: 0px;">{{'送付アドレス：' . $data['email']}}</p>
+        <p style="margin: 0px; padding: 20px 0px 0px 20px;">いつも優秀な人材を紹介してくれてありがとうございます。</p>
+        <p style="margin: 0px; padding: 0px 0px 0px 20px;">これからも、我が社に入ってくれそうな人材をぜひともご紹介ください。</p>
+        <p style="margin: 0px; padding: 0px 0px 0px 20px;">List of Excellent Young-man は、みなさんから人事部に紹介してもいいと思った人たちを登録いただくシステムです。</p>
+        <p style="margin: 0px; padding: 0px 0px 0px 20px;">もし人事部から連絡してもよい優秀な方がいらっしゃいましたら、ぜひご登録をお願いします。</p>
+        <p style="margin: 0px; padding: 20px 0px 0px 20px;">List of Excellent Young-manには下記からアクセス下さい。</p>
+        <a style="margin: 0px; padding: 20px 0px 0px 40px;" href="{{ route('mediatorMyPage') }}"> {{ route('mediatorMyPage') }}</a>
+        <p style="margin: 0px; padding: 10px 0px 20px 20px;">{{ $data['name'] . ' 様の個別パスワードは、「' . $data['password'] . '」となっております。'}}</p>
       </div>
-    </div>
-    <form method="POST" >
-				@csrf
-        <input type='hidden' name='name' value="{{ $data['name'] }}">
-        <input type='hidden' name='department' value="{{ $data['department'] }}">
-        <input type='hidden' name='email' value="{{ $data['email'] }}">
-        <input type='hidden' name='password' value="{{ $data['password'] }}">
+      <form class="my-5" method="POST" >
+			  @csrf
+          <input type='hidden' name='name' value="{{ $data['name'] }}">
+          <input type='hidden' name='department' value="{{ $data['department'] }}">
+          <input type='hidden' name='email' value="{{ $data['email'] }}">
+          <input type='hidden' name='password' value="{{ $data['password'] }}">
 	
-        <button class="btn btn-sm btn-primary" type="submit" formaction="/commitMediator">
-				登録を確定してメールを送信する。
-				</button>
-        <button class="btn btn-sm btn-primary" type="submit" formaction="/editMediator">
-				戻って修正する。
-				</button>
-			</div>
-		</form>
+          <button class="btn btn-bg btn-primary" type="submit" formaction="/commitMediator">
+				  登録を確定してメールを送信する。
+				  </button>
+          <button class="btn btn-bg btn-primary" type="submit" formaction="/editMediator">
+				  戻って修正する。
+				  </button>
+  		</form>
+    </div>
 	</main>
 </body>

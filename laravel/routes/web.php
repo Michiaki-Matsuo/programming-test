@@ -34,6 +34,7 @@ Route::group(['middleware' => ['guest']], function () {
  */
 Route::group(['middleware' => 'auth'], function () {
 Route::get('/', [App\Http\Controllers\HomeController::class, 'myPage'])->name('myPage');
+Route::get('/mediatorMyPage', [App\Http\Controllers\HomeController::class, 'mediatorMyPage'])->name('mediatorMyPage');
 Route::get('/myPage', [App\Http\Controllers\HomeController::class, 'myPage'])->name('myPage');
 Route::get('/addMediator', [App\Http\Controllers\HomeController::class, 'addMediator'])->name('addMediator');
 Route::post('/confirmWithDraft', [App\Http\Controllers\HomeController::class, 'confirmWithDraft'])->name('confirmWithDraft');

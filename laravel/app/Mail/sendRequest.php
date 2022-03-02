@@ -28,8 +28,6 @@ class sendRequest extends Mailable
      */
     public function build()
     {
-        return $this->from('11111@77777.com')
-        ->subject('March')
-        ->markdown('emails.flatText');
+        return $this;
     }
 }

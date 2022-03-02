@@ -76,7 +76,14 @@ class HomeController extends Controller
             ]);
         }
         //メールを送信する。
-        Mail::to('test@example.com')->send(new sendRequest);
+        $reqToMediator = new sendRequest;
+        $reqToMediator->from($user['email'])
+        ->subject('List of Excellent Young-man からのご招待')
+        ->text('emails.flatText')
+        ->markdown('emails.request')
+        ->with(['data' => $data]);
+
+        Mail::to('test@example.com')->send($reqToMediator);
         
 		return redirect('/');
     }
@@ -93,7 +100,7 @@ class HomeController extends Controller
         );
         
         $messages = [ $data['department'] . ' ' . $data['name'] . ' 様',
-                    ' 送付先アドレス：' . $data['email'],
+                    ' 送付アドレス：' . $data['email'],
                     ' ',
                     'いつも優秀な人材を紹介してくれてありがとうございます。',
         			'これからも、我が社に入ってくれそうな人材をぜひともご紹介ください。',
