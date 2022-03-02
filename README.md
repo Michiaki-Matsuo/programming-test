@@ -4,9 +4,9 @@
 
 バージョン情報は以下のとおりです。
 
-- PHP 8.0.16 
+- PHP               8.0.16 
 - Laravel Framework 8.69.0
-- MySQL 5.7.37
+- MySQL             5.7.37
 
 ### Docker による開発環境の構築手順
 
@@ -32,15 +32,31 @@
 > cd THIS_REPOSITORY_DIR
 > docker-compose up -d
 > docker exec -it tttest-laravel bash
-$ php artisan migration
+$ php artisan migrate
 
 
 ### 初期データ、およびユーザーの登録方法
 
-次の歯面から人事部担当者の登録を行えます。
+初期データと致しましてはマイページにログインするための人事部担当者の登録が必要です。
+次のURLから人事部担当者の登録を行ってください。
 http://localhost:8000/register
 
+初期データは以上です。
+
 ### システム側のメール設定
+このリポジトリではすでに動作確認出来るように設定を併せていますので改めて設定項目はございません。
+
+参考までに重要な設定項目を以下に示しておきます。
+(1) laravelの.envより
+MAIL_DRIVER=smtp
+MAIL_HOST=mailhog
+MAIL_PORT=1025
+
+(2))docker-compose.ymlより
+  mailhog:
+    ports:
+      - "1025:1025"
+      - "8025:8025"
 
 ### システム起動までの準備及び起動手順
 
@@ -52,13 +68,10 @@ docker と docker-compose が必要です。
 コンテナ起動後に、以下のURLでアクセスできます  
 
 - ログイン画面：   http://localhost:8000/
-- DBのマイグレーションが出来ていない場合：
-　　- 人事部向けマイページ： http://localhost:8000/noDB/mypage
-  
 - phpMyAdmin画面： http://localhost:8880/  
 - MailHog画面：    http://localhost:8025/   
 
-コンテナ内のシェルに移動する  
+コンテナ内のシェルに移動することが出来ます。  
 
 ```sh
 > cd THIS_REPOSITORY_DIR

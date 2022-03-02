@@ -51,7 +51,7 @@ class HomeController extends Controller
     public function addMediator()
     {
         $data=['name'=>'','department'=>'','email'=>''];
-        return view('addMediator',compact('data'));
+        return view('addMediator',compact('data'))->with('success', 'テストメッセージ');
     }
     public function editMediator(Request $request)
     {
@@ -74,45 +74,50 @@ class HomeController extends Controller
                 'ownerid' => $user['id'],
                 'password' => Hash::make($data['password'])
             ]);
-        }
-        //メールを送信する。
-        $reqToMediator = new sendRequest;
-        $reqToMediator->from($user['email'])
-        ->subject('List of Excellent Young-man からのご招待')
-        ->text('emails.flatText')
-        ->markdown('emails.request')
-        ->with(['data' => $data]);
+            
 
-        Mail::to('test@example.com')->send($reqToMediator);
-        
+            //メールを送信する。
+            $reqToMediator = new sendRequest;
+            $reqToMediator->from($user['email'])
+                    ->subject('List of Excellent Young-man からのご招待')
+                    ->text('emails.flatText')
+                    ->markdown('emails.request')
+                    ->with(['data' => $data]);
+
+            Mail::to('test@example.com')->send($reqToMediator);
+            $request->session()->flash('message', '登録完了。メール送信完了。');
+
+        }        
 		return redirect('/');
     }
 	public function confirmWithDraft(Request $request)
 	{
 		$data = $request->all();
         $user = \Auth::user();
+
+               // 同じメールアドレスを持つ情報提供者がいるか確認
+               $exist_mediator = Mediator::where('email', $data['email'])->first();
+        if( empty($exist_mediator['id']) ){
+            //メール内容の確認作業を続行
         
-        //数字と英語の小文字と大文字が混ざったランダムな 8 文字
-        $password = str_shuffle(
-                            substr(str_shuffle('1234567890'), 0, 2) .
-                            substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 3) .
-                            substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 3)
-        );
-        
-        $messages = [ $data['department'] . ' ' . $data['name'] . ' 様',
-                    ' 送付アドレス：' . $data['email'],
-                    ' ',
-                    'いつも優秀な人材を紹介してくれてありがとうございます。',
-        			'これからも、我が社に入ってくれそうな人材をぜひともご紹介ください。',
-				    'List of Excellent Young-man は、みなさんから人事部に紹介してもいいと思った人たちを登録いただくシステムです。',
-				    'もし人事部から連絡してもよい優秀な方がいらっしゃいましたら、ぜひご登録をお願いします。',
-                    ' ',
-                    'List of Excellent Young-manにはこちらからアクセス下さい。こちら＝＞http://localhost/',
-                    $data['name'] . ' 様のパスワードは、「' . $password . '」となっております。'
-                    ]; 
-        $pwd = ['password' => $password];
-        $data = array_merge($data,$pwd);  
-         
-		return view('/confirmWithDraft',compact('messages','data'));
+            //数字と英語の小文字と大文字が混ざったランダムな 8 文字を生成。
+            $password = str_shuffle(
+                                substr(str_shuffle('1234567890'), 0, 2) .
+                                substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 3) .
+                                substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 3)
+            );
+            
+            $pwd = ['password' => $password];
+            $data = array_merge($data,$pwd);  
+            
+            return view('/confirmWithDraft',compact('data'));
+
+        }else{
+            // いる場合は
+            // 情報提供者情報の再入力
+            $request->session()->flash('message', '( '.$data['email'].' )は既に登録されています。');
+            $data = $request->all();
+	        return view('addMediator',compact('data'));
+        }
 	}
 }

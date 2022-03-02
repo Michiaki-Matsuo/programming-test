@@ -6,5 +6,7 @@
 List of Excellent Young-man は、みなさんから人事部に紹介してもいいと思った人たちを登録いただくシステムです。
 もし人事部から連絡してもよい優秀な方がいらっしゃいましたら、ぜひご登録をお願いします。
 
-List of Excellent Young-manにはこちらからアクセス下さい。こちら＝＞http://localhost/
+List of Excellent Young-manには下記からアクセス下さい。
+{{ route('mediatorMyPage') }}
+
 >{{ $data['name'] . ' 様の個別パスワードは、「' . $data['password'] . '」となっております。'}}

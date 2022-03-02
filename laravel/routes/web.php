@@ -4,11 +4,6 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\sendRequest;
 
-Route::get('/test', function () {
-    Mail::to('test@example.com')->send(new sendRequest);
-    return 'メール送信しました！';
-});
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes

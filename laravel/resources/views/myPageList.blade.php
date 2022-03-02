@@ -1,7 +1,7 @@
 @extends('layouts.mypage')
 @section('mediator')
 	<div class="row py-3">
-		<div class="col-md-5 border border-3"> <p class="text-decoration-underline h3">紹介(情報提供者)</p>
+		<div class="col-md-auto border border-3"> <p class="text-decoration-underline h3">紹介(情報提供者)</p>
 			<table>
 				@foreach($mediators AS $mediator)
 				<tr>
@@ -10,7 +10,7 @@
 				@endforeach
 			</table>
 		</div>
-		<div class="col-md-3 border border-3"> <p class="text-decoration-underline h3">ご紹介(対象者様)</p> 
+		<div class="col-md-auto border border-3"> <p class="text-decoration-underline h3">ご紹介(対象者様)</p> 
 			<table>
 				@foreach($targets AS $target)
 				<tr>
