@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Mediator;
+use App\Models\Target;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\sendRequest;
 
@@ -37,16 +39,25 @@ class HomeController extends Controller
     public function myPage()
     {
 		$user = \Auth::user();
-	$mediators = Mediator::where('ownerid',$user['id'])->get();
+	$mediators = User::find($user['id'])->mediators;
 	
-	$targets = [
-		[ 'name' => '松尾道明',
-		'company' => '株式会社A',
-		'medi_name' => '中山　優',
-		'medi_depart' => '営業部　営業課']
-	];
+	$targets = Target::get();
+    $target_list = array();
 
-	return view('myPageList',compact('mediators','targets'));
+    foreach($targets as $target){
+        $mediator = Mediator::find($target['mediator_id']);
+        $target_list =array_merge(
+            $target_list,
+            array([
+                'name' => $target['name'],
+                'company' => $target['company'],
+                'medi_name' => $mediator['name'],
+                'medi_depart' => $mediator['department']
+            ])
+             );
+    }
+
+	return view('myPageList',compact('mediators','target_list'));
     }
     public function addMediator()
     {
@@ -71,7 +82,7 @@ class HomeController extends Controller
                 'name' => $data['name'],
                 'department' => $data['department'],
                 'email' => $data['email'],
-                'ownerid' => $user['id'],
+                'user_id' => $user['id'],
                 'password' => Hash::make($data['password'])
             ]);
             
