@@ -57,8 +57,13 @@
 
 		</div>
 	    </div> <!--col-row-->
-@yield('mediator')
-	</div>
+      @if (Session::has('message'))
+				<div class="bg-light text-success">
+					{{ Session::get('message') }}
+				</div>
+			@endif
+      @yield('mediator')
+    </div>
 
   </body>
 </html>

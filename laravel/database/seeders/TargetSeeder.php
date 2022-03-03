@@ -18,5 +18,10 @@ class TargetSeeder extends Seeder
             'company' => '内閣府',
             'mediator_id' => '1'
         ]);
+        Target::create([
+            'name' => '出来杉英才',
+            'company' => '小学館',
+            'mediator_id' => '5'
+        ]);
     }
 }

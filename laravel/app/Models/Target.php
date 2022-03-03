@@ -10,9 +10,9 @@ class Target extends Model
 {
     use HasFactory;
 
-    public function mediater()
+    public function mediator()
     {
-        return $this->hasOne(Mediator::class,'mediator_id','id');
+        return $this->hasOne(Mediator::class,'id','mediator_id');
     }
 
 }

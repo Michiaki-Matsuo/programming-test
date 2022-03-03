@@ -15,10 +15,10 @@
 				@foreach($target_list AS $target)
 
 				<tr>
-					<td class="px-3"> {{ $target['company'] }} </td> <td class="px-3"> {{ $target['name'] }} </td> 
+					<td class="px-3"> {{ $target['company'] }} </td> <td class="px-2"> {{ $target['name'] }} </td> 
 				</tr>
 				<tr>
-					<td class="px-3"> {{ $target['medi_depart'] }} </td> <td class="px-3"> {{ $target['medi_name'] }} </td> 
+					<td class="px-4 py-1 font-weight-bold">紹介者</td><td class="px-0"> {{ $target['medi_depart'] }} </td> <td class="px-2"> {{ $target['medi_name'] }} </td> 
 				</tr>
 				@endforeach
 			</table>

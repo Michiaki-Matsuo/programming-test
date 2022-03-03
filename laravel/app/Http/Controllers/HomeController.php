@@ -39,9 +39,9 @@ class HomeController extends Controller
     public function myPage()
     {
 		$user = \Auth::user();
-	$mediators = User::find($user['id'])->mediators;
+	$mediators = User::find($user['id'])->mediators;// リレーション
 	
-	$targets = Target::get();
+	$targets = Target::all();
     $target_list = array();
 
     foreach($targets as $target){
@@ -62,7 +62,7 @@ class HomeController extends Controller
     public function addMediator()
     {
         $data=['name'=>'','department'=>'','email'=>''];
-        return view('addMediator',compact('data'))->with('success', 'テストメッセージ');
+        return view('addMediator',compact('data'));
     }
     public function editMediator(Request $request)
     {
@@ -92,7 +92,7 @@ class HomeController extends Controller
             $reqToMediator->from($user['email'])
                     ->subject('List of Excellent Young-man からのご招待')
                     ->text('emails.flatText')
-                    ->markdown('emails.request')
+                    ->view('emails.request')
                     ->with(['data' => $data]);
 
             Mail::to('test@example.com')->send($reqToMediator);
